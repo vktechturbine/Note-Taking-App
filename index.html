@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>My Notes</title>
+    <style>
+        .modal{
+            margin-top:70px;
+            
+        }
+        textarea:focus,input:focus {
+            outline: none;
+            
+        }
+       
+        /* #in1,#in2
+        {
+            border-top: none ;
+            border-left: none;
+            border-right: none;
+            width: 100%;
+        } */
+        .form-group{
+            width: 100% !important; 
+
+        }
+        #content
+        {
+          background-color: white;
+          width: 100%;
+          height: 100%;
+          margin-top: 10px;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        #divid2::-webkit-scrollbar {
+           display: none; 
+          
+          
+      } 
+   
+    
+       
+    </style>
+</head>
+<body>
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-light" style="background-color:#DF5672 ;">
+        <a class="navbar-brand" href="#">
+          <img src="./images/notes-svgrepo-com.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+          Notes
+          <img data-toggle="modal" data-target="#exampleModal" style="margin-left:355px;" src="./images/add.png" width="30" height="30" class="d-inline-block align-top" alt="">
+         <span>Add Note</span>   
+        </a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success btn-light my-2 my-sm-0" type="submit">Search</button>
+          </form>
+      </nav> 
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Title</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title">
+               
+              </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="save" data-dismiss="modal" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+
+      </div>
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+   
+   <script src="./app.js"></script>
+</body>
+</html>

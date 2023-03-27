@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example</title>
+   <style>
+     #content
+    {
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        /* position: relative; */
+       
+    }
+    #divid2::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+    } 
+   </style>
+</head>
+<body>
+    <div id="content">
+
+    </div>
+    <script>
+      /*   let a = [];
+
+        if(a.length == 0)
+        {
+            a = a.concat(JSON.parse(localStorage.user));
+           console.log(a);
+        }
+        if(a.length > 0)
+        {
+            document.write("not empty")
+        }
+       */ 
+      for(let i = 1; i <= 20; i++)
+      {
+
+     
+      let div1 = document.createElement('div'); 
+      let divid = document.createAttribute('id');
+    
+      div1.style.border = "1px solid black";
+      div1.style.width ="300px";
+      div1.style.height ="300px";
+      div1.style.marginLeft="15px";
+    //   div1.style.flexGrow="auto";
+      div1.style.position="relative";
+      
+      
+      
+    //   div1.style.marginLeft = "10px";
+      div1.style.margintop = "15px";
+      div1.style.marginBottom = "15px";
+     
+     
+      let h1 = document.createElement('h1');
+      h1.style.paddingLeft = "10px"
+      h1.style.paddingRight = "10px"
+      let hr= document.createElement('HR');
+    //   hr.style.olor = "red";
+      hr.style.cssText = "width:95%";
+    //   hr.style.cssText =? " border:none; height: 20px; width: 105%; height: 50px; border-bottom: 1px solid #1f1209;  margin: -45px -8px"
+      
+      h1.innerHTML = "Title";
+    
+
+      let p = document.createElement('p');
+      p.style.padding="10px";
+      p.innerHTML=`1. Apple <br> 2.Mango`;            
+                   
+    let div2 = document.createElement('div');
+    // let div2id = document.createAttribute('id');
+    div2.setAttribute("id","divid2");
+    div2.style.cssText = "overflow: hidden;width:97%; border:1px solid black; height:65%;overflow-y:scroll;margin-top:10px; margin-left:5px; margin-right:5px; margin-bottom:15px";
+    // div2.append(p);
+      document.getElementById('content').append(div1);
+      
+      let br = document.createElement('br');
+
+      
+      div1.append(h1);
+      div1.append(hr);
+      div1.append(div2);
+    //   let user = {
+    //     name : "Vishal",
+    //     surname : "Kerlekea"
+    //   }
+    //   let user1 = {
+    //     name : "Vishal",
+    //     surname : "Kerlekea"
+    //   }
+    /*  localStorage.user = JSON.stringify(user);
+     localStorage.user = JSON.stringify(user1); */
+     
+      }
+    //   console.log(typeof JSON.parse(localStorage.user));
+    //   console.log(typeof localStorage.getItem('user'));
+    //  console.log(Object.keys(JSON.parse(localStorage.user)).length);
+    //  console.log(JSON.parse(localStorage.user).length);
+    //  console.log(localStorage.user);
+
+    //  let title = JSON.parse(localStorage.user).map(object => object.title)
+    //  let desc = JSON.parse(localStorage.user).map(object => object.description)
+    //  console.log(title[0]+" "+desc[0]);
+    //  console.log(title.length);
+    //  console.log(localStorage.length > 0);
+   
+   /* let mytime = setTimeout(mytimmer,1000);
+    function mytimmer()
+    {
+        
+        clearTimeout(mytime)
+        document.location.reload();
+    } */
+ /*    if(performance.navigation.type == performance.navigation.TYPE_RELOAD)
+    {
+
+    } */
+
+    console.log(window.performance.navigation.TYPE_RELOAD);
+ 
+
+
+    </script>
+</body>
+</html>
