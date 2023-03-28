@@ -1,22 +1,3 @@
-/* $('#myModal').on('shown.bs.modalw', function () {
-    $('#myInput').trigger('focus')
-  }) */
-
-// if( localStorage.length > 0 )
-// {
-    /* window.onload(()=>
-    {
-        let title = JSON.parse(localStorage.user).map(object => object.title)
-        let desc = JSON.parse(localStorage.user).map(object => object.description)
-        for(let i = 0; i < title.length; i++)
-        {
-            addData(title[i],desc[i]);
-        }
-    }) */
-// }
-// else
-// {
-
 
 let user;
 let notes = [];
@@ -28,7 +9,7 @@ document.getElementById('save').onclick = function () {
         title: document.getElementById('exampleInputEmail1').value,
         description: document.getElementById('exampleFormControlTextarea1').value
     }
-    // addData(user.title,user.description);
+    
     if( notes.length == 0 && localStorage.length > 0)
     {
         console.log(Object.keys(localStorage)[0] == "user");
@@ -60,22 +41,7 @@ document.getElementById('save').onclick = function () {
 
 
   
-/* let usr = JSON.parse(localStorage.user);
-for(let u of usr)
-{
-   document.createElement()
-} */
 
-// let  a=[];
-// for(let u of JSON.parse(localStorage.user))
-// {
-  
-//   a.push(u);
-  
-// }
-// console.log(a[0].title);
-
-//    for(let i = 0; i < a.length;i++ )
 if(window.performance.navigation.TYPE_RELOAD == window.performance.navigation.type )
     {
         let title = JSON.parse(localStorage.user).map(object => object.title)
@@ -86,13 +52,13 @@ if(window.performance.navigation.TYPE_RELOAD == window.performance.navigation.ty
         }
       
     }
-// console.log(window.performance.navigation.type);
+
 function addData(title, description,i)
 {
 
 
      let div1 = document.createElement('div'); 
-    // let divid = document.createAttribute('id');
+   
     div1.setAttribute("id","divid2")
     div1.style.cssText = "overflow: hidden; overflow-y:scroll; border: 1px solid black; width:50vh; height:50vh; margin-left:15px; position:relative;margin-top:15px;margin-bottom:15px;"
 
@@ -116,28 +82,18 @@ function addData(title, description,i)
     btn.innerHTML = "delete";
     
     let hr= document.createElement('HR');
-  //   hr.style.olor = "red";
+
     hr.style.cssText = "width:95%";
-    // hr.style.cssText =" border:none; height: 20px; width: 105%; height: 50px; border-bottom: 1px solid #1f1209;  margin: -45px -8px"
     
     h1.innerHTML = `${title}`;
   
 
-    // let p = document.createElement('textarea');
-    /* p.style.padding="10px";
-    p.style.width="100% ";
-    p.style.height="100%";
-    p.style.border="none";
-    p.style.outline= "none";
-    p.style.overflow="hidden;"; */
-    /* p.style.overflowY="scroll" */
-    /* p.innerHTML=`${description}`;   */          
+         
                  
   let div2 = document.createElement('div');
-  // let div2id = document.createAttribute('id');
   div2.setAttribute("id","divid2");
   div2.style.cssText = "overflow-x:hidden; width:97%;  height:65%;overflow-y:scroll;margin-top:10px; margin-left:5px; margin-right:5px; margin-bottom:15px";
-//   div2.append(p);
+
 div2.innerHTML = `${description.replace(/.+/g, "<div class='rslines'>$&</div>")}`;  
     document.getElementById('content').append(div1);
     
@@ -151,19 +107,7 @@ div2.innerHTML = `${description.replace(/.+/g, "<div class='rslines'>$&</div>")}
     div1.append(div2); 
 }
  
-    // setTimeout(function () { location.reload(true); }, 1000);
-
-
-// document.write(`<h1 style="margin-top:20px;">${usr.title}</h1>`)
-// let usr = JSON.parse(localStorage.user);
-
-// console.log(usr.title[0]);
-//         let h1 = document.createElement('h1');
-//         let id = document.createAttribute('title');
-//         document.getElementById('title').innerHTML = `${usr.title[0]}`;
-
-//         document.getElementById('content').append(h1);
-// console.log()
+    
 function onDelete(del)
 {
     let myarr = JSON.parse(localStorage.user);
@@ -172,30 +116,39 @@ function onDelete(del)
     localStorage.setItem("user",JSON.stringify(myarr));
     window.location.reload();
 }
-document.getElementById('search').onclick = function(){
-    // alert(document.getElementById('searchin').value);
+document.getElementById('searchin').onkeyup = function(){
+    
 
-    let sarch = document.getElementById('searchin').value;
+    let sarch = document.getElementById('searchin').value.toLowerCase();
 
-    setTimeout(()=>{
-        document.getElementById('searchin').value="";
-    })
+    let title = JSON.parse(localStorage.user).filter(object => object.title.toLowerCase().includes(sarch));
 
-    /* let title = JSON.parse(localStorage.user).map(object => object.title);
-    let desc = JSON.parse(localStorage.user).map(object => object.description); */
-    for(let i = 0; i < JSON.parse(localStorage.user).length; i++)
+    let desc = JSON.parse(localStorage.user).filter(object => object.description.toLowerCase().includes(sarch));
+
+
+    
+    if(title.length > 0)
     {
-        
-        // if(JSON.parsel(localStorage.user).filter)
-        // {
-        //     document.getElementById('content').style.display = "none";
-        //     addData(title[i],desc[i],i);
-        //     break;
+        document.getElementById('content').innerHTML = "";
+        for(let i = 0 ; i < title.length;i++)
+        {
+           
+            addData(title[i].title,title[i].description,i);
             
-        // }
-        alert(JSON.parse(localStorage.user)[i].title);
+        }
         
+    } 
+    else
+    {
+        document.getElementById('content').innerHTML = "";
+        for(let i = 0 ; i < desc.length;i++)
+        {
+           
+            addData(desc[i].title,desc[i].description,i);
+            
+        }
     }
+    
     
 
 
