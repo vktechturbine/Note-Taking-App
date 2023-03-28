@@ -37,7 +37,7 @@ document.getElementById('save').onclick = function () {
         localStorage.setItem("user", JSON.stringify(notes))
         let title = JSON.parse(localStorage.user).map(object => object.title)
         let desc = JSON.parse(localStorage.user).map(object => object.description)
-        addData(title[title.length-1],desc[desc.length-1])
+        addData(title[title.length-1],desc[desc.length-1],title.length-1)
         console.log((title[title.length-1],desc[desc.length-1]))
         
         
@@ -48,7 +48,7 @@ document.getElementById('save').onclick = function () {
         localStorage.setItem("user", JSON.stringify(notes))
         let title = JSON.parse(localStorage.user).map(object => object.title)
         let desc = JSON.parse(localStorage.user).map(object => object.description)
-        addData(title[title.length-1],desc[desc.length-1]);
+        addData(title[title.length-1],desc[desc.length-1],title.length-1);
     }
       
 
@@ -82,12 +82,12 @@ if(window.performance.navigation.TYPE_RELOAD == window.performance.navigation.ty
         let desc = JSON.parse(localStorage.user).map(object => object.description)
         for(let i = 0; i < title.length; i++)
         {
-            addData(title[i],desc[i]);
+            addData(title[i],desc[i],i);
         }
       
     }
 // console.log(window.performance.navigation.type);
-function addData(title, description)
+function addData(title, description,i)
 {
 
 
@@ -97,15 +97,24 @@ function addData(title, description)
     div1.style.cssText = "overflow: hidden; overflow-y:scroll; border: 1px solid black; width:50vh; height:50vh; margin-left:15px; position:relative;margin-top:15px;margin-bottom:15px;"
 
    
-   
+   let titlediv = document.createElement('div');
+   titlediv.style.cssText = "width:40vh; height:7vh; margin-left:10px; margin-top:-50px;overflow-x:scroll; overflow-y:hidden";
+    titlediv.setAttribute("id","divid2");
     let h1 = document.createElement('h1');
     h1.style.paddingLeft = "10px"
     h1.style.paddingRight = "10px"
     h1.style.display= "inline-flex";
     h1.style.flex="wrap";
   
-    h1.style.margin="5px"
+    h1.style.margin="5px";
     h1.style.width = "100%";
+    let btn = document.createElement('img');
+    btn.setAttribute("src","./images/close.png");
+    btn.setAttribute("id",i);
+    btn.setAttribute("onclick",`onDelete(${i})`);
+    btn.style.cssText = "margin-left:385px;margin-top:10px; width:50px; height:50px;";
+    btn.innerHTML = "delete";
+    
     let hr= document.createElement('HR');
   //   hr.style.olor = "red";
     hr.style.cssText = "width:95%";
@@ -134,9 +143,11 @@ div2.innerHTML = `${description.replace(/.+/g, "<div class='rslines'>$&</div>")}
     
     let br = document.createElement('br');
 
-    
-    div1.append(h1);
+    titlediv.append(h1);
+    div1.append(btn);
+    div1.append(titlediv);
     div1.append(hr);
+
     div1.append(div2); 
 }
  
@@ -153,6 +164,41 @@ div2.innerHTML = `${description.replace(/.+/g, "<div class='rslines'>$&</div>")}
 
 //         document.getElementById('content').append(h1);
 // console.log()
+function onDelete(del)
+{
+    let myarr = JSON.parse(localStorage.user);
+    console.log(myarr);
+    myarr.splice(del,1);
+    localStorage.setItem("user",JSON.stringify(myarr));
+    window.location.reload();
+}
+document.getElementById('search').onclick = function(){
+    // alert(document.getElementById('searchin').value);
 
+    let sarch = document.getElementById('searchin').value;
+
+    setTimeout(()=>{
+        document.getElementById('searchin').value="";
+    })
+
+    /* let title = JSON.parse(localStorage.user).map(object => object.title);
+    let desc = JSON.parse(localStorage.user).map(object => object.description); */
+    for(let i = 0; i < JSON.parse(localStorage.user).length; i++)
+    {
+        
+        // if(JSON.parsel(localStorage.user).filter)
+        // {
+        //     document.getElementById('content').style.display = "none";
+        //     addData(title[i],desc[i],i);
+        //     break;
+            
+        // }
+        alert(JSON.parse(localStorage.user)[i].title);
+        
+    }
+    
+
+
+}
 
 

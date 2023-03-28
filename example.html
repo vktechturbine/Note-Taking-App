@@ -60,9 +60,11 @@
       div1.style.marginBottom = "15px";
      
      
-      let h1 = document.createElement('h1');
+      let h1 = document.createElement('div');
       h1.style.paddingLeft = "10px"
       h1.style.paddingRight = "10px"
+      h1.style.overflowY="hidden";
+      h1.style.overflowX = "scroll"
       let hr= document.createElement('HR');
     //   hr.style.olor = "red";
       hr.style.cssText = "width:95%";
@@ -124,8 +126,17 @@
 
     } */
 
-    console.log(window.performance.navigation.TYPE_RELOAD);
- 
+    // console.log(window.performance.navigation.TYPE_RELOAD);
+ let title = JSON.parse(localStorage.user).map(object => object.title);
+
+    for(let i = 0; i < title.length;i++)
+    {
+      if(title[i] == 'Bikes')
+      {
+        
+      }
+    }
+
 
 
     </script>
