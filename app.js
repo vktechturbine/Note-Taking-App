@@ -1,7 +1,18 @@
+/* import {userName} from "./loginRegister.js";*/
+if(Object.keys(localStorage) ==  "user")
+
+{
+    addData();
+} 
+
+
+
+
+
+
 
 let user;
 let notes = [];
-
 
 
 document.getElementById('save').onclick = function () {
@@ -13,54 +24,90 @@ document.getElementById('save').onclick = function () {
     if (notes.length == 0 && localStorage.length > 0) {
         console.log(Object.keys(localStorage)[0] == "user");
         notes = notes.concat(JSON.parse(localStorage.user));
-        notes.push(user);
-        localStorage.setItem("user", JSON.stringify(notes))
-        let title = JSON.parse(localStorage.user).map(object => object.title)
-        let desc = JSON.parse(localStorage.user).map(object => object.description)
-        addData(title[title.length - 1], desc[desc.length - 1], title.length - 1)
-        console.log((title[title.length - 1], desc[desc.length - 1]))
+        console.log(notes);
+        notes.unshift(user);
 
+        localStorage.setItem("user", JSON.stringify(notes)) 
 
+        // let title = JSON.parse(localStorage.user).map(object => object.title)
+        // let desc = JSON.parse(localStorage.user).map(object => object.description)
+        // console.log(title.length);
+        /* 
+       for(let i = 0; i < title.length ; i++)
+       {
+            addData(title[title.length - i], desc[title.length - i], title.length - i);
+            break;
+       } */
+        //    addData(title[0], desc[0], 0);
+
+        // addData(title[0], desc[0],)
+        // console.log((title[title.length - 1], desc[desc.length - 1]))
+
+        // window.location.reload();
+        
     }
     else {
-        notes.push(user);
-        localStorage.setItem("user", JSON.stringify(notes))
-        let title = JSON.parse(localStorage.user).map(object => object.title)
-        let desc = JSON.parse(localStorage.user).map(object => object.description)
-        addData(title[title.length - 1], desc[desc.length - 1], title.length - 1);
-    }
+        console.log("else");
+        notes.unshift(user);
+        localStorage.setItem("user", JSON.stringify(notes)) 
+        // let title = JSON.parse(localStorage.user).map(object => object.title)
+        // let desc = JSON.parse(localStorage.user).map(object => object.description)
+
+        /* for(let i = 0; i < title.length ; i++)
+        {
+             addData(title[title.length - i], desc[title.length - i], title.length - i);
+        } */
+        // addData(title[title.length - 1], desc[title.length - 1], title.length - 1);
+        // addData(title[0], desc[0], 0);
+        // window.location.reload();
+
+     }
 
 
     setTimeout(() => {
         document.getElementById('exampleInputEmail1').value = "";
         document.getElementById('exampleFormControlTextarea1').value = "";
     },)
-}
-
-
-
-
-if (window.performance.navigation.TYPE_RELOAD == window.performance.navigation.type) {
-    let title = JSON.parse(localStorage.user).map(object => object.title)
-    let desc = JSON.parse(localStorage.user).map(object => object.description)
-    for (let i = 0; i < title.length; i++) {
-        addData(title[i], desc[i], i);
+    if(Object.keys(localStorage) ==  "user")
+    {
+        addData();
     }
+} 
 
-}
 
-function addData(title, description, i) {
 
+ if (Object.keys(localStorage) == "user") {
+    console.log(Object.keys(localStorage));
+    if (window.performance.navigation.TYPE_RELOAD == window.performance.navigation.type) {
+        let title = JSON.parse(localStorage.user).map(object => object.title)
+        let desc = JSON.parse(localStorage.user).map(object => object.description)
+        for (let i = 0; i < title.length; i++) {
+            addData(title[i], desc[i], i);
+        }
+
+    }
+} 
+
+
+function addData() {
+
+    const notes = JSON.parse(localStorage.getItem('user'));
     const container = document.getElementById('note_container')
-    container.innerHTML += `<div class="col mb-4" id="colu"><div class="card" style="width: 18rem;">
-<div class="card-body">
-  <h5 class="card-title">${title}</h5>
-  <p class="card-text">${description.replace(/.+/g, "<p class='rslines'>$&</p>")}</p>
-  <a class="btn btn-primary" onclick="onDelete(${i})">delete</a>
-  <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" onclick="onEditable(${i})">edit</a>
-</div>
-</div>
-</div>`
+    let html = '';
+    notes.map((note, index) => {
+        return (html += `<div class="col mb-4" id="colu"><div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h2 class="card-title">${note.title}</h2>
+          <p class="card-text">${note.description.replace(/.+/g, "<p class='rslines'>$&</p>")}</p>
+          <a class="btn btn-default" onclick="onDelete(${index})"><img style="width:35px; height:35px;" src="./images/close.png"></a>
+          <a class="btn btn-default" data-toggle="modal" data-target="#exampleModal1" onclick="onEditable(${index})"><img style="width:35px; height:35px;" src="./images/edit.png"></a>
+        </div>
+        </div>
+        </div>`);
+    })
+    container.innerHTML = html;
+} 
+
     //     let div1 = document.createElement('div'); 
 
     //     div1.setAttribute("id","divid2")
@@ -118,7 +165,7 @@ function addData(title, description, i) {
     //     div1.append(hr);
 
     //     div1.append(div2); 
-}
+
 /* Delete Option */
 function onDelete(del) {
 
@@ -126,7 +173,8 @@ function onDelete(del) {
     console.log(myarr);
     myarr.splice(del, 1);
     localStorage.setItem("user", JSON.stringify(myarr));
-    window.location.reload();
+    // window.location.reload();
+    addData();
 }
 /* search Otion */
 document.getElementById('searchin').onkeyup = function () {
@@ -144,19 +192,47 @@ document.getElementById('searchin').onkeyup = function () {
 
     if (title.length > 0) {
         document.getElementById('note_container').innerHTML = "";
+        let html = ""
         for (let i = 0; i < title.length; i++) {
+            console.log(title[i].description);
+           
 
-            addData(title[i].title, title[i].description, i);
-            
+            html+=`<div class="col mb-4" id="colu"><div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h2 class="card-title">${title[i].title}</h2>
+              <p class="card-text">${title[i].description.replace(/.+/g, "<p class='rslines'>$&</p>")}</p>
+              <a class="btn btn-default" onclick="onDelete(${i})"><img style="width:35px; height:35px;" src="./images/close.png"></a>
+              <a class="btn btn-default" data-toggle="modal" data-target="#exampleModal1" onclick="onEditable(${i})"><img style="width:35px; height:35px;" src="./images/edit.png"></a>
+            </div>
+            </div>
+            </div>`
+
+            document.getElementById('note_container').innerHTML= html;
+
+
 
         }
 
     }
-    else {
+    if(desc.length > 0) {
         document.getElementById('note_container').innerHTML = "";
+        let html = ""
         for (let i = 0; i < desc.length; i++) {
 
-            addData(desc[i].title, desc[i].description, i);
+            console.log(desc[i].description);
+           
+
+            html+=`<div class="col mb-4" id="colu"><div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h2 class="card-title">${desc[i].title}</h2>
+              <p class="card-text">${desc[i].description.replace(/.+/g, "<p class='rslines'>$&</p>")}</p>
+              <a class="btn btn-default" onclick="onDelete(${i})"><img style="width:35px; height:35px;" src="./images/close.png"></a>
+              <a class="btn btn-default" data-toggle="modal" data-target="#exampleModal1" onclick="onEditable(${i})"><img style="width:35px; height:35px;" src="./images/edit.png"></a>
+            </div>
+            </div>
+            </div>`
+
+            document.getElementById('note_container').innerHTML= html;
 
         }
     }
@@ -168,17 +244,15 @@ document.getElementById('searchin').onkeyup = function () {
 
 /* Edit Option */
 
-let edit_id ;
+let edit_id;
 function onEditable(edit) {
     edit_id = edit;
     let title = JSON.parse(localStorage.user).map(object => object.title);
 
     let desc = JSON.parse(localStorage.user).map(object => object.description);
 
-    for(let i = 0; i < title.length; i++)
-    {
-        if(edit == i)
-        {
+    for (let i = 0; i < title.length; i++) {
+        if (edit == i) {
             let title1 = document.getElementById('editTitle').value = title[i];
             let desc1 = document.getElementById('editDescription').value = desc[i];
 
@@ -187,18 +261,18 @@ function onEditable(edit) {
 
 }
 
- document.getElementById('saveas').onclick = function(){
-    let titlevalue = document.getElementById('editTitle').value ;
+document.getElementById('saveas').onclick = function () {
+    let titlevalue = document.getElementById('editTitle').value;
     let descvalue = document.getElementById('editDescription').value;
 
     let editArray = JSON.parse(localStorage.user);
 
     console.log(editArray);
-    editArray.splice(edit_id,1,{title : titlevalue, description : descvalue});
+    editArray.splice(edit_id, 1, { title: titlevalue, description: descvalue });
     localStorage.setItem("user", JSON.stringify(editArray));
     window.location.reload();
     console.log(editArray);
 
- 
-} 
+
+}
 
