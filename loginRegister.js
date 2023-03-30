@@ -1,6 +1,6 @@
 /* Registration */
-console.log("object");
-const register = () => {
+
+function register() {
     let registerValue = document.getElementById('exampleInputEmail2').value;
     let users = Object.keys(localStorage);
 
@@ -13,22 +13,24 @@ const register = () => {
 
     }
     localStorage.setItem(registerValue, "");
+    
 
 }
-// export const userName = "";
 
-function login() {
+
+document.getElementById('login').onclick = function() {
     let loginValue = document.getElementById('exampleInputEmail2').value;
     let userNotFFound = 0;
     let users = Object.keys(localStorage);
     for (let i = 0; i < users.length; i++) {
         if (loginValue == users[i]) {
             alert(`Welcome ${loginValue} in Notes`);
-            // document.getElementById('redirect').setAttribute('action', "./index.html");
-            console.log(loginValue);
-            userName = users[i];
+            document.getElementById('redirect').setAttribute('action', "/index.html");
+            
+           console.log(users[i]);
+            localStorage.setItem("username",users[i]);
             userNotFFound = 1;
-            location.replace('/index.html');
+           
         }
 
     }
