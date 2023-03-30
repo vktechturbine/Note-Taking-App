@@ -1,13 +1,10 @@
 /* import {userName} from "./loginRegister.js";*/
-if(Object.keys(localStorage) ==  "user")
-
+let username = localStorage.getItem('username'); 
+document.getElementById('usernameid').innerHTML = username; 
+if(localStorage.getItem(username) != "")
 {
     addData();
-} 
-
-
-
-
+}
 
 
 
@@ -21,10 +18,10 @@ document.getElementById('save').onclick = function () {
         description: document.getElementById('exampleFormControlTextarea1').value
     }
 
-    if (notes.length == 0 && localStorage.length > 0) {
-        console.log(Object.keys(localStorage)[0] == "user");
+    if ((notes.length == 0 && localStorage.length > 0) && localStorage.getItem(username) != "" ) {
+        console.log(Object.keys(localStorage)[0] == username);
         notes = notes.concat(JSON.parse(localStorage.user));
-        console.log(notes);
+       
         notes.unshift(user);
 
         localStorage.setItem("user", JSON.stringify(notes)) 
@@ -49,7 +46,7 @@ document.getElementById('save').onclick = function () {
     else {
         console.log("else");
         notes.unshift(user);
-        localStorage.setItem("user", JSON.stringify(notes)) 
+        localStorage.setItem(username, JSON.stringify(notes)) 
         // let title = JSON.parse(localStorage.user).map(object => object.title)
         // let desc = JSON.parse(localStorage.user).map(object => object.description)
 
@@ -68,22 +65,19 @@ document.getElementById('save').onclick = function () {
         document.getElementById('exampleInputEmail1').value = "";
         document.getElementById('exampleFormControlTextarea1').value = "";
     },)
-    if(Object.keys(localStorage) ==  "user")
-    {
+   
         addData();
-    }
+    
 } 
 
 
 
- if (Object.keys(localStorage) == "user") {
-    console.log(Object.keys(localStorage));
+ if (localStorage.getItem(username) != "") {
+   
     if (window.performance.navigation.TYPE_RELOAD == window.performance.navigation.type) {
-        let title = JSON.parse(localStorage.user).map(object => object.title)
-        let desc = JSON.parse(localStorage.user).map(object => object.description)
-        for (let i = 0; i < title.length; i++) {
-            addData(title[i], desc[i], i);
-        }
+        
+            addData();
+        
 
     }
 } 
@@ -91,7 +85,7 @@ document.getElementById('save').onclick = function () {
 
 function addData() {
 
-    const notes = JSON.parse(localStorage.getItem('user'));
+    const notes = JSON.parse(localStorage.getItem(username));
     const container = document.getElementById('note_container')
     let html = '';
     notes.map((note, index) => {
@@ -169,7 +163,7 @@ function addData() {
 /* Delete Option */
 function onDelete(del) {
 
-    let myarr = JSON.parse(localStorage.user);
+    let myarr = JSON.parse(localStorage.getItem(username));
     console.log(myarr);
     myarr.splice(del, 1);
     localStorage.setItem("user", JSON.stringify(myarr));
@@ -184,9 +178,9 @@ document.getElementById('searchin').onkeyup = function () {
 
     // console.log(sarch);
 
-    let title = JSON.parse(localStorage.user).filter(object => object.title.toLowerCase().includes(sarch));
+    let title = JSON.parse(localStorage.getItem(username)).filter(object => object.title.toLowerCase().includes(sarch));
 
-    let desc = JSON.parse(localStorage.user).filter(object => object.description.toLowerCase().includes(sarch));
+    let desc = JSON.parse(localStorage.getItem(username)).filter(object => object.description.toLowerCase().includes(sarch));
 
 
 
@@ -247,9 +241,9 @@ document.getElementById('searchin').onkeyup = function () {
 let edit_id;
 function onEditable(edit) {
     edit_id = edit;
-    let title = JSON.parse(localStorage.user).map(object => object.title);
+    let title = JSON.parse(localStorage.getItem(username)).map(object => object.title);
 
-    let desc = JSON.parse(localStorage.user).map(object => object.description);
+    let desc = JSON.parse(localStorage.getItem(username)).map(object => object.description);
 
     for (let i = 0; i < title.length; i++) {
         if (edit == i) {
@@ -265,7 +259,7 @@ document.getElementById('saveas').onclick = function () {
     let titlevalue = document.getElementById('editTitle').value;
     let descvalue = document.getElementById('editDescription').value;
 
-    let editArray = JSON.parse(localStorage.user);
+    let editArray = JSON.parse(localStorage.getItem(username));
 
     console.log(editArray);
     editArray.splice(edit_id, 1, { title: titlevalue, description: descvalue });
