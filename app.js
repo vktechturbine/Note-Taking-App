@@ -8,23 +8,25 @@ if(localStorage.getItem(username) != "")
 
 
 
-let user;
-let notes = [];
+
+
 
 
 document.getElementById('save').onclick = function () {
+    let notes = [];
+    let user;
     user = {
         title: document.getElementById('exampleInputEmail1').value,
         description: document.getElementById('exampleFormControlTextarea1').value
     }
 
-    if ((notes.length == 0 && localStorage.length > 0) && localStorage.getItem(username) != "" ) {
-        console.log(Object.keys(localStorage)[0] == username);
-        notes = notes.concat(JSON.parse(localStorage.user));
+    if (notes.length == 0  && localStorage.getItem(username) != "" ) {
+        // console.log(Object.keys(localStorage)[0] == username);
+        notes = notes.concat(JSON.parse(localStorage.getItem(username)));
        
         notes.unshift(user);
 
-        localStorage.setItem("user", JSON.stringify(notes)) 
+        localStorage.setItem(username, JSON.stringify(notes)) 
 
         // let title = JSON.parse(localStorage.user).map(object => object.title)
         // let desc = JSON.parse(localStorage.user).map(object => object.description)
@@ -46,6 +48,7 @@ document.getElementById('save').onclick = function () {
     else {
         console.log("else");
         notes.unshift(user);
+        console.log(notes);
         localStorage.setItem(username, JSON.stringify(notes)) 
         // let title = JSON.parse(localStorage.user).map(object => object.title)
         // let desc = JSON.parse(localStorage.user).map(object => object.description)
@@ -166,7 +169,7 @@ function onDelete(del) {
     let myarr = JSON.parse(localStorage.getItem(username));
     console.log(myarr);
     myarr.splice(del, 1);
-    localStorage.setItem("user", JSON.stringify(myarr));
+    localStorage.setItem(username, JSON.stringify(myarr));
     // window.location.reload();
     addData();
 }
@@ -263,10 +266,9 @@ document.getElementById('saveas').onclick = function () {
 
     console.log(editArray);
     editArray.splice(edit_id, 1, { title: titlevalue, description: descvalue });
-    localStorage.setItem("user", JSON.stringify(editArray));
+    localStorage.setItem(username, JSON.stringify(editArray));
     window.location.reload();
     console.log(editArray);
 
 
 }
-

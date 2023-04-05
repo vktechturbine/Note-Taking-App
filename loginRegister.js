@@ -12,7 +12,14 @@ function register() {
         }
 
     }
-    localStorage.setItem(registerValue, "");
+    if(registerValue != '')
+    {
+        localStorage.setItem(registerValue, "");
+    }
+    else
+    {
+        alert('please enter username');
+    }
     
 
 }
@@ -25,7 +32,7 @@ document.getElementById('login').onclick = function() {
     for (let i = 0; i < users.length; i++) {
         if (loginValue == users[i]) {
             alert(`Welcome ${loginValue} in Notes`);
-            document.getElementById('redirect').setAttribute('action', "/index.html");
+            document.getElementById('redirect').setAttribute('action', "./login.html");
             
            console.log(users[i]);
             localStorage.setItem("username",users[i]);
