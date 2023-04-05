@@ -15,6 +15,8 @@ function register() {
     if(registerValue != '')
     {
         localStorage.setItem(registerValue, "");
+        alert('Register Successfully');
+        document.getElementById('exampleInputEmail2').value='';
     }
     else
     {

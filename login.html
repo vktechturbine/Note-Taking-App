@@ -7,8 +7,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <title>My Notes</title>
     <style>
+      @media screen and (max-width:700px) {
+        .container{
+          margin-left:100px ;
+          margin-top: 50px !important;
+        }
+        #add {
+        margin-left: 10px !important;
+      }
+      #usernameid{
+        margin-left: -100px !important;
+        margin-top: 10px;
+      }
+      #addnote{
+        display: none;
+      }
+      #searchin
+      {
+        margin-left: -10px;
+      }
+      #logout
+      {
+        margin-left: 5px;
+      }
+      }
+      #add {
+        margin-left:150px;
+      }
         .modal{
             margin-top:70px;
+           
             
         }
         textarea:focus,input:focus {
@@ -50,10 +78,10 @@
     <!-- Nav Bar -->
     <nav class="navbar navbar-light" style="background-color:#DF5672 ;">
         <a class="navbar-brand" href="#">
-          <img src="./images/notes-svgrepo-com.svg" width="30" height="30" class="d-inline-block align-top float-left" alt="">
+          <img src="./images/notes-svgrepo-com.svg" width="30" height="30" class=" align-top float-left" alt="">
           <span class="float-left">Notes</span>
-          <img data-toggle="modal" data-target="#exampleModal" style="margin-left:150px;" src="./images/add.png" width="30" height="30" class="d-inline-block align-top float-left" alt="" id="imgid">
-         <span>Add Note</span>   
+          <img data-toggle="modal" data-target="#exampleModal" id="add"  src="./images/add.png" width="30" height="30" class="d-inline-block align-top float-left" alt="" id="imgid">
+          <span id="addnote">Add Notes</span>
         </a>
         <form class="form-inline">
             <h5 style="margin-right: 15px;" id="usernameid"></h5>
