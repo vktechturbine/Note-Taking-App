@@ -219,7 +219,7 @@ document.getElementById('searchin').onkeyup = function () {
             console.log(desc[i].description);
            
 
-            html+=`<div class="col mb-4" id="colu"><div class="card" style="width: 18rem;">
+            html+=`<div  class="col mb-4" id="colu"><div class="card">
             <div class="card-body">
               <h2 class="card-title">${desc[i].title}</h2>
               <p class="card-text">${desc[i].description.replace(/.+/g, "<p class='rslines'>$&</p>")}</p>
