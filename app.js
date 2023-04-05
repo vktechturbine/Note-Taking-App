@@ -272,3 +272,8 @@ document.getElementById('saveas').onclick = function () {
 
 
 }
+
+document.getElementById('logout').onclick = function()
+{
+    window.open("./index.html")
+}
