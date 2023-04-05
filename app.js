@@ -275,5 +275,5 @@ document.getElementById('saveas').onclick = function () {
 
 document.getElementById('logout').onclick = function()
 {
-    window.open("./index.html")
+    window.open("./index.html","_self")
 }
